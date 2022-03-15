@@ -1,0 +1,79 @@
+nmap -sP 10.10.1.0/24 : tells up that the scan gonna run to this subnet started with 10 10 1 0
+-sP: ping sweeps sends out a series of ICMP packets to see who responds(any host up)
+
+whatweb (ip-ip) --agression 3 -v --no-errors : gonna scan the system of the targets ip
+
+
+arp-scan 10.10.1.0/24  :scan throw the network to see any physical hosts(the same with up)
+
+whois.domaintools.com : website that you can start picking your target.
+
+OSINT (Open Source Intelligence Gathering) : websites to find udpated on vulnerabilitys.
+1)cve.mitre.org
+2) us-cert.gov/
+3) csrc.nist.gov/
+4)jpcert.or.jp/english/vh/project.html
+
+To specifie what ports we are dealing with we use nmap -sS/-O  (ip).
+Now to make full scan on the target for all ports we use nmap -p 1-65535 (ip). THIS ONE IS NOISER
+
+we do after knowing whats the ports is scanning more on specific port like: nmap -p 21 -A (ip)
+
+we use nikto -h (ip) to find more about what this ip ports running on..
+
+openvas and nessus are for vulnerabilitys more advanced way.
+FOR OPENVAS:[*] Please note the password for the admin user
+[*] User created with password '0c99c95a-fe00-4fc7-af48-7c972376dac8'.
+
+
+nmap -A -p 21 -T4 10.10.1.0/24 : going to scan for all subnets that has 21 port and use -A option,(T0/1/2/3/4/5/ :time for nmap to how to send quieres)
+
+NOTE: befor we want to procced to either VULSCAN or VULNERS we must be either /usr/share/nmap/scripts/vulscan or /usr/share/nmap/scripts/nmap-vulners
+nmap --script vulners -sV (ip): gonna use script from database of nmap and try to analyze how and what we can exploit the vulnerability
+nmap --script vulscan -sV (ip) : the same but with more info
+nmap --script vulners.nse/vulscan.nse --script-args vulscandb/vulnersdb=exploitdb.csv -sV (ip) : gonna spicifie to deep into the port exploit
+
+now we head to cd /usr/share/metasploit-framework: here now we wanna search what is inside the metasploit to exploit
+forward to ...metasploit-framework/modules/exploits/linux/ftp...
+then we go to msfconsole(its the metasploit) and use what we have found like: use exploit/linux/ftp/ftpd-234-....
+we know what to do.
+
+****WE CAN ALSO CHECK FRO VULNERABILITIES BUY SCANNING ON (OPENVAS) GO TO CONFIGUURATION TARGETS SET NEW TARGET AND HEAD TO SCANS THEN TASKS THEN NEW TASKS...******
+
+-------------------------------------------------------------------------------------------------
+                                        ATTACKING AND EXPLOITING
+
+first one we gonna use PHISHING method:
+
+1) spear phishing: we go to applications then head to SET (social engineering toolkit in exploit tools section)
+
+2)RUN SET and then we go with 1 1 1 6 2 ipforus.......when we done we gonna wait to the victim to open the file in the mail and we in! 
+---------------------------------------------------------------------------------------------------
+                                        SQLinjection
+
+first as we did in DVWA website test we tried to inject code by adding single qoute " ' " and thats giving as permission to add code and then 
+we tried to know what vulnerability we have in this website by adding the URL and the COOKIE and use it by SQLMAP by typing: sqlmap -u "(URL)" --COOKIE"(THE COOKIE)" --risk 1-3 level 1-3.
+----------------------------------------------------------------------------------------------------
+                                        CLEANING UP DIRTS..
+
+so now we are gonna know how to clean up every command we did after we done with the attack so no one can know what we did also we wanna do before, something we use it to hide our files inside the victim's system,
+ we make file directory and add "." before: touch .Nidal.txt so by adding the DOT before the name it will be hidding until we use -al command then we seach for .bash_history to delet every thing we did inside
+ .
+.
+.
+.
+.
+.
+we start our scan for the ip adress by two different types of scan , the -sS witch is the THE STEALTH SCAN it sends SYN request and recieve back an SYN/ARK response so it means there is port lessining to our port 
+but its not complete hand way shake proccess its good for IDS (intrusion detection system) and if we want to  make full hand way shake we can use the -sT command it will pring back all the info about the port by doing the full hand way shake.
+
+
+-nmap -sV -T4 10.10.1.10 -oA Nidaltest : after doing the full 'hand way shake' we want the version beyond these ports and timming 4 aggressive one and gonna save it with ".nmap .gmap .xml files"
+
+**we can use -O (OS DETECTOR) but its will take long time maybe cus it scans the ping first to see what hosts up and then do the work, instead we can use -Pn (DISABLING PING part).
+ 
+
+
+
+
+
